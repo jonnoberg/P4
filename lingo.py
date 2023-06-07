@@ -1,9 +1,20 @@
+import sqlite3
 class Lingo:
 
     # Constructor met de declaratie van het atribuut woord.
     def __init__(self):
-        self.woord = str.lower("Lingo")
+        self.woord = self.set_woord()
         self.beurt = 1
+
+    # Functie om een woord te selecteren uit de database
+    def set_woord(self):
+        connection = sqlite3.connect('lingo.sqlite3')
+        cursor = connection.execute('SELECT * FROM vijfletters ORDER BY RANDOM() LIMIT 1;')
+        for row in cursor:
+            woord = row[0]
+        connection.close() 
+        print(woord)
+        return woord
 
     def validate_input(self, invoer):
 
