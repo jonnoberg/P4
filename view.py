@@ -11,7 +11,7 @@ invoervelden = {}
 def validate(event):
     print("beurt: " + str(lingo.beurt))
     print("woord: " + lingo.woord)
-   
+
     invoer = invoervelden[lingo.beurt-1].get()
     print("ingevoerd: " + invoer)
 
@@ -26,10 +26,22 @@ def validate(event):
     invoervelden[lingo.beurt-2].insert(END, " > " + uitvoer)
 
     # Update de status
-    status_label.config(text = uitvoer)
+    status_label.config(text=uitvoer)
 
     # Update beurten
-    Beurten_label.config(text = str(lingo.beurt) + "/5")
+    Beurten_label.config(text=str(lingo.beurt) + "/5")
+
+    # Controleer of het spel is afgelopen
+    if uitvoer == "gewonnen" or lingo.beurt > 5:
+        # Bereken de behaalde score
+        behaalde_score = (lingo.beurt)
+
+        # Maak een berichtvenster om de score weer te geven
+        score_venster = Tk()
+        score_venster.title("Score")
+        score_label = Label(score_venster, text="Uw score is: " + str(behaalde_score), font=("Ariel", 14))
+        score_label.pack()
+        score_venster.mainloop()
 
 
 # Main
@@ -39,7 +51,7 @@ app.geometry("300x400")
 app.resizable(False, False)
 
 # Titel
-titel_label = Label(app, text="Welkom bij Lingo", font=("DJB Letter Game Tiles 3", 14, "bold"))
+titel_label = Label(app, text="Welkom bij Lingo", font=("DJB Letter Game Tiles 3", 13, "bold"))
 titel_label.pack()
 
 # Uitleg

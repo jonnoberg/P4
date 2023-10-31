@@ -31,7 +31,7 @@ class Lingo:
 
             # voeg de score toe aan de database
             score = Highscores()
-            score.add_score(naam, self.beurt)  # naam en beurt gescheiden door komma
+            score.add_score(naam, self.beurt)
             return "gewonnen"
         
         # Controleer of het woord 5 letters heeft
